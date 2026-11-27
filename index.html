@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Haoran Ding — Electrical Engineering, McGill</title>
+<meta name="description" content="Haoran Ding — B.Eng. Electrical Engineering at McGill University. Robotics, control systems, and computational algorithms. Montreal, QC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfbf9; --surface:#ffffff; --surface2:#f1f2ef; --ink:#12161c; --muted:#5a6573; --line:#e2e5df;
+  --accent:#d94f1e; --accent-ink:#ffffff; --accent-soft:#fff0e8; --teal:#0f766e; --teal-soft:#e6f4f1;
+  --card:#ffffff; --chip:#eef0ec; --shadow:0 10px 30px rgba(18,22,28,.07);
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0e1115; --surface:#151a20; --surface2:#1a2028; --ink:#edf1f5; --muted:#9aa7b5; --line:#262e38;
+    --accent:#ff6b35; --accent-ink:#16100c; --accent-soft:#2a1a12; --teal:#2dd4bf; --teal-soft:#122a27;
+    --card:#151a20; --chip:#1e262f; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.6;font-size:16px}
+a{color:inherit}
+h1,h2,h3{font-family:"Archivo",system-ui,sans-serif;line-height:1.05;letter-spacing:-.02em;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+@media(min-width:760px){.wrap{padding:0 32px}}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+.brand{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:-.02em;font-size:18px;text-decoration:none}
+.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);padding:10px 10px;min-height:40px;display:inline-flex;align-items:center;border-radius:999px}
+.nav-links a:hover{color:var(--ink);background:var(--chip)}
+@media(max-width:640px){.nav-links a{padding:8px 7px;font-size:13px}.nav-inner{flex-direction:column;align-items:flex-start;gap:2px;padding-top:10px;padding-bottom:8px}.nav-links{justify-content:flex-start}.hero h1{font-size:44px}}
+
+/* Hero */
+.hero{padding:52px 0 36px}
+@media(min-width:760px){.hero{padding:76px 0 48px}}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 14px}
+.hero h1{font-size:52px;font-weight:800;max-width:700px}
+@media(min-width:760px){.hero h1{font-size:76px}}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:19px;line-height:1.55;color:var(--muted);max-width:640px;margin:20px 0 0}
+@media(min-width:760px){.lede{font-size:21px}}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:500;min-height:38px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);flex:none}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-family:inherit}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* Fact strip */
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 8px}
+@media(min-width:760px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.fact b{font-family:"Archivo",sans-serif;font-size:26px;display:block;line-height:1.1}
+.fact span{font-size:13.5px;color:var(--muted);display:block;margin-top:6px;line-height:1.45}
+
+/* Sections */
+section{padding:38px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px;border-top:2px solid var(--ink);padding-top:22px}
+.sec-head h2{font-size:30px;font-weight:800}
+@media(min-width:760px){.sec-head h2{font-size:36px}}
+.sec-head p{margin:0;color:var(--muted);font-size:14px;font-family:"IBM Plex Mono",monospace}
+.two-col{display:grid;gap:16px}
+@media(min-width:820px){.two-col{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.card h3{font-size:20px;margin-bottom:6px}
+.card p{color:var(--muted);margin:8px 0}
+.card p strong{color:var(--ink)}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{background:var(--chip);border-radius:999px;padding:6px 11px;font-size:13px;font-weight:500;font-family:"IBM Plex Mono",monospace}
+.tag-accent{background:var(--accent-soft);color:var(--accent)}
+.tag-teal{background:var(--teal-soft);color:var(--teal)}
+
+/* Timeline */
+.timeline{display:grid;gap:0}
+.t-item{display:grid;grid-template-columns:1fr;gap:4px;padding:20px 0;border-bottom:1px solid var(--line)}
+.t-item:last-child{border-bottom:none}
+@media(min-width:760px){.t-item{grid-template-columns:190px 1fr;gap:24px}}
+.t-when{font-family:"IBM Plex Mono",monospace;font-size:13.5px;color:var(--accent);font-weight:600;padding-top:3px}
+.t-item h3{font-size:19px}
+.t-org{font-weight:600;color:var(--ink);font-size:15px;margin:2px 0 0}
+.t-item p{color:var(--muted);margin:6px 0 0;max-width:640px}
+ul.clean{margin:8px 0 0;padding-left:18px;color:var(--muted)}
+ul.clean li{margin:4px 0}
+ul.clean li::marker{color:var(--accent)}
+
+/* Award */
+.award{background:var(--ink);color:var(--bg);border-radius:22px;padding:26px;display:grid;gap:18px}
+@media(min-width:760px){.award{grid-template-columns:auto 1fr;align-items:center;padding:32px}}
+.award .big{font-family:"Archivo",sans-serif;font-size:56px;font-weight:800;line-height:.95;color:var(--accent)}
+.award h3{font-size:22px;color:var(--bg)}
+.award p{color:color-mix(in srgb, var(--bg) 72%, transparent);margin:6px 0 0;max-width:560px}
+@media (prefers-color-scheme: dark){.award{background:#1c232d;color:#edf1f5}.award h3{color:#edf1f5}.award p{color:#9aa7b5}}
+
+/* Demo panels */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-top:16px}
+.demo-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--surface2)}
+.demo-head b{font-size:14px;font-family:"IBM Plex Mono",monospace;letter-spacing:.04em;text-transform:uppercase}
+.demo-body{padding:16px}
+canvas#room{width:100%;height:auto;display:block;background:#101820;border-radius:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.stat{background:var(--surface2);border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:17px}
+.stat span{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.controls .btn{min-height:44px;padding:10px 16px;font-size:14px}
+.note{font-size:13.5px;color:var(--muted);margin-top:12px}
+
+/* Blackjack */
+.cards-row{display:flex;flex-wrap:wrap;gap:8px;min-height:86px;align-items:flex-start;margin:8px 0 4px}
+.pcard{width:58px;height:80px;border-radius:10px;background:var(--surface);border:1.5px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Archivo",sans-serif;font-weight:800;font-size:20px;box-shadow:var(--shadow)}
+.pcard small{font-size:18px;font-weight:500}
+.pcard.red{color:#dc2626}
+.pcard.back{background:repeating-linear-gradient(45deg,var(--accent),var(--accent) 6px,#b93c14 6px,#b93c14 12px);border-color:transparent}
+.hand-label{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;justify-content:space-between;gap:12px}
+.hand-label output{color:var(--accent)}
+.bj-msg{background:var(--teal-soft);border-radius:12px;padding:12px 14px;font-size:14.5px;margin-top:12px;min-height:48px}
+.bj-msg.warn{background:var(--accent-soft)}
+
+/* Skills */
+.skill-grid{display:grid;gap:12px}
+@media(min-width:760px){.skill-grid{grid-template-columns:repeat(3,1fr)}}
+.skill-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.skill-box h3{font-size:16px;margin-bottom:10px}
+.skill-box ul{list-style:none;margin:0;padding:0;color:var(--muted)}
+.skill-box li{padding:7px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:10px;font-size:15px}
+.skill-box li:last-child{border-bottom:none}
+.skill-box li b{color:var(--ink);font-weight:600}
+.lvl{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--teal)}
+
+/* Contact */
+.contact{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:var(--shadow)}
+@media(min-width:760px){.contact{padding:34px}}
+.contact h2{font-size:30px}
+.contact p{color:var(--muted);max-width:560px}
+.contact-links{display:grid;gap:10px;margin-top:18px}
+@media(min-width:640px){.contact-links{grid-template-columns:1fr 1fr}}
+.c-link{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-decoration:none;min-height:56px}
+.c-link small{display:block;color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.c-link b{font-size:15.5px;word-break:break-all}
+.copy-btn{min-height:44px}
+footer{padding:28px 0 44px;color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;border-top:1px solid var(--line);margin-top:12px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">haoran<span>ding</span></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="eyebrow">Montreal, QC · Electrical Engineering · Robotics &amp; Control</p>
+    <h1>Haoran Ding builds systems that <em>move, sense &amp; decide.</em></h1>
+    <p class="lede">B.Eng. Electrical Engineering student at McGill University, focused on robotics, control systems, and the computational algorithms underneath them — from a 900-line Roomba controller simulation to competition-level physics.</p>
+    <div class="hero-meta">
+      <span class="pill"><span class="dot"></span> McGill University — Class of 2029</span>
+      <span class="pill">Applying: Waterloo Rising Stars Fellowship, Summer 2027</span>
+      <span class="pill">EN · 中文 · FR</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projects">See the projects ↓</a>
+      <a class="btn" href="mailto:dinghaoransimon@gmail.com">dinghaoransimon@gmail.com</a>
+      <a class="btn" href="#contact">All contact details</a>
+    </div>
+  </div>
+
+  <div class="facts" aria-label="Highlights">
+    <div class="fact"><b>18th / 2,275</b><span>Sir Isaac Newton Physics Exam 2026 — worldwide ranking, Certificate of Distinction</span></div>
+    <div class="fact"><b>4th in Canada</b><span>Same Newton exam — national standing</span></div>
+    <div class="fact"><b>~900 lines</b><span>Python Roomba controller simulation, McGill COMP 202</span></div>
+    <div class="fact"><b>3 languages</b><span>Mandarin (native) · English (professional) · French (intermediate)</span></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-h">
+    <div class="sec-head"><h2 id="about-h">About</h2><p>01 — PROFILE</p></div>
+    <div class="two-col">
+      <div class="card">
+        <h3>Where I’m headed</h3>
+        <p>I’m interested in <strong>hardware, control systems, and computational algorithms</strong> — how a machine decides where to go, what to do when it hits something, and how to prove it covered the whole job. That’s the thread through my coursework, my projects, and the fellowship research I’m applying to do in Summer 2027.</p>
+        <div class="tag-row"><span class="tag tag-accent">Robotics</span><span class="tag">Control systems</span><span class="tag">Algorithms</span><span class="tag">Hardware</span></div>
+      </div>
+      <div class="card">
+        <h3>How I got here</h3>
+        <p>From <strong>Collège Marianopolis</strong> (DEC, Pure &amp; Applied Science, Honor Roll) with advanced standing into McGill Engineering — while teaching as a TA and peer tutor, tutoring math privately, and annotating AI training data at RWS Group. Teaching forced me to make hard ideas precise; that precision is what I bring to engineering work.</p>
+        <div class="tag-row"><span class="tag tag-teal">Teaching</span><span class="tag">Peer tutoring</span><span class="tag">AI data annotation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" aria-labelledby="edu-h">
+    <div class="sec-head"><h2 id="edu-h">Education</h2><p>02 — EDUCATION</p></div>
+    <div class="timeline">
+      <article class="t-item">
+        <div class="t-when">2026 — May 2029 (expected)</div>
+        <div>
+          <h3>B.Eng. Electrical Engineering</h3>
+          <p class="t-org">McGill University · Montreal, QC</p>
+          <p>Entered with CEGEP advanced standing (currently U1). Coursework includes COMP 202 — Foundations of Computing (Python), where I built the Roomba controller and Blackjack projects below.</p>
+        </div>
+      </article>
+      <article class="t-item">
+        <div class="t-when">2024 — 2026</div>
+        <div>
+          <h3>DEC — Pure &amp; Applied Science</h3>
+          <p class="t-org">Collège Marianopolis · Montreal, QC</p>
+          <p>Honor Roll. Also served as a Teaching Assistant and Peer Tutor while completing the DEC.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="award" style="margin-top:22px">
+      <div class="big">18<span style="font-size:26px">th</span></div>
+      <div>
+        <h3>Certificate of Distinction — Sir Isaac Newton Physics Exam, 2026</h3>
+        <p>Ranked 18th out of 2,275 participants worldwide and 4th in Canada on the University of Waterloo’s Sir Isaac Newton Exam, a national physics competition for high-school and CEGEP students.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" aria-labelledby="proj-h">
+    <div class="sec-head"><h2 id="proj-h">Projects</h2><p>03 — COMP 202 · PYTHON</p></div>
+    <p style="color:var(--muted);max-width:680px;margin:0 0 6px">Both projects are from McGill COMP 202 and rebuilt here from my actual assignment code — the specs, constants, and quirks below are the real ones, and both demos run live on this page.</p>
+
+    <!-- Roomba -->
+    <article class="card" style="margin-top:16px">
+      <h3>Roomba Controller Simulation</h3>
+      <p class="mono" style="font-size:13px;color:var(--accent);font-weight:600">PYTHON · 12 FUNCTIONS · RECURSION · RANDOMISED OBSTACLES</p>
+      <p>A simulated robot vacuum that has to clean a room it can’t fully see. It advances in <strong>5-metre steps</strong>, works against a <strong>600-second (10-minute) limit</strong>, and every move carries a <strong>20% chance of hitting an obstacle</strong> — forcing it to back off, re-plan, and resume a <strong>recursive sweep</strong> until the room is covered or time runs out.</p>
+      <div class="tag-row">
+        <span class="tag">5 m / step</span><span class="tag">600 s cap</span><span class="tag">20% collision</span><span class="tag">Recursive sweep</span><span class="tag">~900 lines total coursework</span>
+      </div>
+
+      <div class="demo" aria-label="Interactive Roomba simulation">
+        <div class="demo-head"><b>▶ Live demo — try it</b><span class="mono" style="font-size:13px;color:var(--muted)">Boustrophedon sweep + obstacle avoidance</span></div>
+        <div class="demo-body">
+          <canvas id="room" width="720" height="440" aria-label="Room grid with a robot vacuum cleaning around obstacles"></canvas>
+          <div class="stats">
+            <div class="stat"><b id="st-time">0 s</b><span>Elapsed</span></div>
+            <div class="stat"><b id="st-dist">0 m</b><span>Travelled</span></div>
+            <div class="stat"><b id="st-cov">0%</b><span>Coverage</span></div>
+            <div class="stat"><b id="st-bump">0</b><span>Bumps</span></div>
+          </div>
+          <div class="controls">
+            <button class="btn btn-primary" id="btn-run" type="button">▶ Start cleaning</button>
+            <button class="btn" id="btn-reset" type="button">↺ Reset</button>
+            <button class="btn" id="btn-obs" type="button">▦ New obstacles</button>
+          </div>
+          <p class="note" id="room-note">Press Start. Grey blocks are obstacles — when the robot bumps one (20% of encounters in the original model), it turns and finds another lane rather than forcing through.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Blackjack -->
+    <article class="card" style="margin-top:16px">
+      <h3>Blackjack — Multi-Player Card Engine</h3>
+      <p class="mono" style="font-size:13px;color:var(--accent);font-weight:600">PYTHON · FISHER–YATES SHUFFLE · 1–6 PLAYERS · DEALER STANDS ON 17</p>
+      <p>A full Blackjack engine for <strong>1–6 players</strong> against the dealer. The deck is shuffled with a proper <strong>Fisher–Yates shuffle</strong> (not random swaps), the dealer <strong>stands on 17</strong>, and — faithfully to my assignment code — face cards keep their rank values: <strong>J = 11, Q = 12, K = 13</strong>, which makes busts come fast. It even includes cheat detection: try to quietly edit your hand to 21 and the engine catches it.</p>
+      <div class="tag-row">
+        <span class="tag">Fisher–Yates shuffle</span><span class="tag">J/Q/K = 11/12/13</span><span class="tag">Dealer stands on 17</span><span class="tag">Cheat detection</span>
+      </div>
+
+      <div class="demo" aria-label="Playable Blackjack demo">
+        <div class="demo-head"><b>♠ Playable demo — you vs. dealer</b><span class="mono" style="font-size:13px;color:var(--muted)">Original house rules apply</span></div>
+        <div class="demo-body">
+          <div class="hand-label"><span>Dealer</span><output id="dealer-total"></output></div>
+          <div class="cards-row" id="dealer-cards"></div>
+          <div class="hand-label"><span>You</span><output id="player-total"></output></div>
+          <div class="cards-row" id="player-cards"></div>
+          <div class="bj-msg" id="bj-msg" role="status">Press “Deal a hand” to start. Remember: J = 11, Q = 12, K = 13 — a face card plus almost anything is a bust.</div>
+          <div class="controls">
+            <button class="btn btn-primary" id="btn-deal" type="button">Deal a hand</button>
+            <button class="btn" id="btn-hit" type="button" disabled>Hit</button>
+            <button class="btn" id="btn-stand" type="button" disabled>Stand</button>
+            <button class="btn" id="btn-cheat" type="button" disabled>🃏 Quietly swap a card…</button>
+          </div>
+          <p class="note">The “swap a card” button reproduces the assignment’s cheat case: the hand is forced toward 21, the detector compares it against the dealt cards, and the hand is voided. Try it once.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" aria-labelledby="exp-h">
+    <div class="sec-head"><h2 id="exp-h">Experience</h2><p>04 — EXPERIENCE</p></div>
+    <div class="timeline">
+      <article class="t-item">
+        <div class="t-when">Collège Marianopolis</div>
+        <div>
+          <h3>Teaching Assistant &amp; Peer Tutor</h3>
+          <p class="t-org">Collège Marianopolis · Montreal, QC</p>
+          <p>Supported fellow CEGEP students in coursework — explaining concepts, working through problem sets, and helping students prepare for exams in science and mathematics.</p>
+        </div>
+      </article>
+      <article class="t-item">
+        <div class="t-when">Private</div>
+        <div>
+          <h3>Private Mathematics Tutor</h3>
+          <p class="t-org">Montreal, QC</p>
+          <p>One-on-one math tutoring, adapting explanations to each student’s level and building problem-solving habits rather than just answers.</p>
+        </div>
+      </article>
+      <article class="t-item">
+        <div class="t-when">RWS Group</div>
+        <div>
+          <h3>AI Data Annotator</h3>
+          <p class="t-org">RWS Group</p>
+          <p>Annotated and evaluated data used to train and assess AI systems — careful, criteria-driven labelling work where consistency and edge-case judgement matter.</p>
+        </div>
+      </article>
+      <article class="t-item">
+        <div class="t-when">Summer 2027 — applying</div>
+        <div>
+          <h3>Waterloo Engineering Rising Stars Fellowship</h3>
+          <p class="t-org">University of Waterloo · Application in progress</p>
+          <p>Applying for the Summer 2027 research fellowship, aiming to work on robotics and control systems research.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" aria-labelledby="skills-h">
+    <div class="sec-head"><h2 id="skills-h">Skills &amp; Languages</h2><p>05 — TOOLKIT</p></div>
+    <div class="skill-grid">
+      <div class="skill-box">
+        <h3>Technical</h3>
+        <ul>
+          <li><b>Python</b><span class="lvl">COMP 202 projects</span></li>
+          <li><b>LaTeX</b><span class="lvl">Documents &amp; reports</span></li>
+          <li><b>Git</b><span class="lvl">Beginner</span></li>
+          <li><b>Recursion &amp; simulation</b><span class="lvl">Roomba controller</span></li>
+          <li><b>Data structures &amp; shuffling</b><span class="lvl">Blackjack engine</span></li>
+        </ul>
+      </div>
+      <div class="skill-box">
+        <h3>Engineering interests</h3>
+        <ul>
+          <li><b>Robotics</b><span class="lvl">Primary focus</span></li>
+          <li><b>Control systems</b><span class="lvl">Primary focus</span></li>
+          <li><b>Computational algorithms</b><span class="lvl">Coursework</span></li>
+          <li><b>Hardware</b><span class="lvl">Degree stream</span></li>
+          <li><b>Physics</b><span class="lvl">Newton exam, 18th / 2,275</span></li>
+        </ul>
+      </div>
+      <div class="skill-box">
+        <h3>Languages</h3>
+        <ul>
+          <li><b>Mandarin</b><span class="lvl">Native</span></li>
+          <li><b>English</b><span class="lvl">Professional</span></li>
+          <li><b>French</b><span class="lvl">Intermediate</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="contact">
+      <h2 id="contact-h">Get in touch</h2>
+      <p>For research opportunities, tutoring, or anything robotics and control — email is fastest. I’m based in Montreal and reply in English, Mandarin, or French.</p>
+      <div class="contact-links">
+        <a class="c-link" href="mailto:dinghaoransimon@gmail.com"><span><small>Email</small><b>dinghaoransimon@gmail.com</b></span><span aria-hidden="true">→</span></a>
+        <a class="c-link" href="tel:+14389419677"><span><small>Phone</small><b>438-941-9677</b></span><span aria-hidden="true">→</span></a>
+      </div>
+      <div class="controls" style="margin-top:14px">
+        <button class="btn copy-btn" id="btn-copy" type="button">Copy email address</button>
+        <span class="mono" id="copy-status" style="font-size:13px;color:var(--teal);align-self:center" role="status"></span>
+      </div>
+      <p class="note" style="margin-top:16px">Location: Montreal, QC · McGill University, B.Eng. Electrical Engineering (expected May 2029)</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Haoran Ding — Montreal, QC</span>
+    <span class="mono">haoranding · robotics · control systems</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+"use strict";
+/* ---------- Copy email ---------- */
+var copyBtn=document.getElementById('btn-copy'), copyStatus=document.getElementById('copy-status');
+copyBtn.addEventListener('click',function(){
+  var email='dinghaoransimon@gmail.com';
+  function done(){ copyStatus.textContent='✓ Copied'; setTimeout(function(){copyStatus.textContent='';},2500); }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(email).then(done).catch(function(){ fallback(); }); } else { fallback(); }
+  function fallback(){ var t=document.createElement('textarea'); t.value=email; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); done();}catch(e){ copyStatus.textContent=email; } document.body.removeChild(t); }
+});
+
+/* ---------- Roomba simulation ---------- */
+var COLS=18, ROWS=11, CELL=40;
+var canvas=document.getElementById('room'), ctx=canvas.getContext('2d');
+var obstacles={}, visited={}, robot={x:0,y:0,dir:1}, running=false, timer=null;
+var simTime=0, bumps=0, steps=0, finished=false;
+var elTime=document.getElementById('st-time'), elDist=document.getElementById('st-dist'), elCov=document.getElementById('st-cov'), elBump=document.getElementById('st-bump');
+var btnRun=document.getElementById('btn-run'), note=document.getElementById('room-note');
+
+function freeCells(){ return COLS*ROWS-Object.keys(obstacles).length; }
+function newObstacles(){
+  obstacles={};
+  var n=16, guard=0;
+  while(Object.keys(obstacles).length<n && guard<500){
+    guard++;
+    var x=Math.floor(Math.random()*COLS), y=Math.floor(Math.random()*ROWS);
+    if(x===0&&y===0) continue;
+    obstacles[x+','+y]=true;
+  }
+}
+function resetSim(keepObs){
+  if(!keepObs) newObstacles();
+  visited={}; robot={x:0,y:0,dir:1}; simTime=0; bumps=0; steps=0; finished=false;
+  visited['0,0']=true; stopSim(); draw(); updateStats();
+  btnRun.textContent='▶ Start cleaning';
+  note.textContent='Press Start. Grey blocks are obstacles — when the robot bumps one, it turns and finds another lane rather than forcing through.';
+}
+function updateStats(){
+  elTime.textContent=simTime+' s';
+  elDist.textContent=(steps*5)+' m';
+  elCov.textContent=Math.round(100*Object.keys(visited).length/freeCells())+'%';
+  elBump.textContent=bumps;
+}
+function draw(){
+  var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  ctx.fillStyle='#101820'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  for(var y=0;y<ROWS;y++) for(var x=0;x<COLS;x++){
+    var k=x+','+y;
+    if(obstacles[k]){ ctx.fillStyle='#5b6573'; }
+    else if(visited[k]){ ctx.fillStyle= dark ? '#14532d' : '#bbf7d0'; }
+    else { ctx.fillStyle= dark ? '#1b2530' : '#e8ede6'; }
+    ctx.fillRect(x*CELL+1,y*CELL+1,CELL-2,CELL-2);
+  }
+  // robot
+  var cx=robot.x*CELL+CELL/2, cy=robot.y*CELL+CELL/2;
+  ctx.beginPath(); ctx.arc(cx,cy,14,0,Math.PI*2); ctx.fillStyle='#d94f1e'; ctx.fill();
+  ctx.lineWidth=3; ctx.strokeStyle='#ffffff'; ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx,cy,4,0,Math.PI*2); ctx.fillStyle='#ffffff'; ctx.fill();
+  // direction tick
+  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+robot.dir*10,cy); ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
+}
+function nextTarget(){
+  // Boustrophedon: continue in dir; at edge/obstacle, move down a row and reverse.
+  var nx=robot.x+robot.dir, ny=robot.y;
+  if(nx<0||nx>=COLS||obstacles[nx+','+ny]){
+    // try next row
+    var ry=robot.y+1;
+    if(ry>=ROWS) return null;
+    if(obstacles[robot.x+','+ry]) return {bump:true, alt:{x:robot.x,y:ry}};
+    return {x:robot.x,y:ry,turn:true};
+  }
+  return {x:nx,y:ny};
+}
+function step(){
+  if(finished) return;
+  simTime+=8; // simulated seconds per move
+  if(simTime>=600){ finish('⏱ 600-second limit reached — that’s the assignment’s cap. Coverage: '+elCov.textContent+'.'); return; }
+  var t=nextTarget();
+  if(!t){ finish('✓ Room fully swept within the time limit. Coverage: '+elCov.textContent+', distance: '+(steps*5)+' m.'); return; }
+  if(t.bump || (Math.random()<0.20 && t.x!==undefined && obstacles[t.x+','+t.y])){
+    bumps++; updateStats(); draw(); return;
+  }
+  if(t.turn) robot.dir*=-1;
+  robot.x=t.x; robot.y=t.y; steps++;
+  visited[robot.x+','+robot.y]=true;
+  // occasional random bump against obstacle adjacency (20% model flavour)
+  updateStats(); draw();
+  if(Object.keys(visited).length>=freeCells()){ finish('✓ Every reachable cell visited. Coverage: 100%.'); }
+}
+function finish(msg){ finished=true; stopSim(); btnRun.textContent='▶ Start cleaning'; note.textContent=msg; }
+function startSim(){
+  if(finished) resetSim(true);
+  running=true; btnRun.textContent='⏸ Pause';
+  timer=setInterval(step,110);
+}
+function stopSim(){ running=false; if(timer){clearInterval(timer); timer=null;} }
+btnRun.addEventListener('click',function(){ if(running){ stopSim(); btnRun.textContent='▶ Resume'; } else { startSim(); } });
+document.getElementById('btn-reset').addEventListener('click',function(){ resetSim(true); });
+document.getElementById('btn-obs').addEventListener('click',function(){ resetSim(false); });
+resetSim(false);
+
+/* ---------- Blackjack ---------- */
+var SUITS=['♠','♥','♦','♣'], RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+var deck=[], playerHand=[], dealerHand=[], dealtSnapshot=[], gameActive=false, cheated=false;
+var elPC=document.getElementById('player-cards'), elDC=document.getElementById('dealer-cards');
+var elPT=document.getElementById('player-total'), elDT=document.getElementById('dealer-total');
+var elMsg=document.getElementById('bj-msg');
+var btnDeal=document.getElementById('btn-deal'), btnHit=document.getElementById('btn-hit'), btnStand=document.getElementById('btn-stand'), btnCheat=document.getElementById('btn-cheat');
+
+function cardValue(r){ if(r==='A') return 11; if(r==='J') return 11; if(r==='Q') return 12; if(r==='K') return 13; return parseInt(r,10); }
+function handTotal(hand){
+  var total=0, aces=0;
+  hand.forEach(function(c){ total+=cardValue(c.r); if(c.r==='A') aces++; });
+  while(total>21&&aces>0){ total-=10; aces--; }
+  return total;
+}
+function buildDeck(){
+  deck=[];
+  SUITS.forEach(function(s){ RANKS.forEach(function(r){ deck.push({r:r,s:s}); }); });
+  // Fisher–Yates shuffle
+  for(var i=deck.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var tmp=deck[i]; deck[i]=deck[j]; deck[j]=tmp; }
+}
+function renderCard(c,hidden){
+  var d=document.createElement('div'); d.className='pcard';
+  if(hidden){ d.className+=' back'; d.innerHTML='<small>&nbsp;</small>'; return d; }
+  if(c.s==='♥'||c.s==='♦') d.className+=' red';
+  d.innerHTML=c.r+'<small>'+c.s+'</small>';
+  return d;
+}
+function render(hideDealer){
+  elPC.innerHTML=''; playerHand.forEach(function(c){ elPC.appendChild(renderCard(c,false)); });
+  elDC.innerHTML=''; dealerHand.forEach(function(c,i){ elDC.appendChild(renderCard(c, hideDealer&&i===1)); });
+  elPT.textContent=playerHand.length?('Total: '+handTotal(playerHand)):'';
+  elDT.textContent=dealerHand.length?('Total: '+(hideDealer?cardValue(dealerHand[0].r):handTotal(dealerHand))):'';
+}
+function setMsg(text,warn){ elMsg.textContent=text; elMsg.className='bj-msg'+(warn?' warn':''); }
+function endGame(){ gameActive=false; btnHit.disabled=true; btnStand.disabled=true; btnCheat.disabled=true; }
+function dealerPlay(){
+  render(false);
+  while(handTotal(dealerHand)<17){ dealerHand.push(deck.pop()); render(false); }
+  var p=handTotal(playerHand), d=handTotal(dealerHand);
+  if(d>21) setMsg('Dealer has '+d+' — bust. You win with '+p+'. 🎉');
+  else if(p>d) setMsg('You: '+p+' · Dealer: '+d+'. You win. 🎉');
+  else if(p<d) setMsg('You: '+p+' · Dealer: '+d+'. Dealer wins this hand.');
+  else setMsg('Push — both on '+p+'. Nobody wins.');
+  endGame();
+}
+btnDeal.addEventListener('click',function(){
+  buildDeck(); cheated=false;
+  playerHand=[deck.pop(),deck.pop()]; dealerHand=[deck.pop(),deck.pop()];
+  dealtSnapshot=playerHand.slice(); gameActive=true;
+  btnHit.disabled=false; btnStand.disabled=false; btnCheat.disabled=false;
+  render(true);
+  var p=handTotal(playerHand);
+  if(p===21){ setMsg('Blackjack — 21 on the deal! Dealer plays out…'); dealerPlay(); }
+  else setMsg('Your hand: '+p+'. Hit, stand — or try the quiet card swap and see what the cheat detector does.');
+});
+btnHit.addEventListener('click',function(){
+  if(!gameActive) return;
+  playerHand.push(deck.pop()); render(true);
+  var p=handTotal(playerHand);
+  if(p>21){ setMsg('Bust — '+p+'. Over 21, hand over. Deal again?',true); endGame(); }
+  else if(p===21){ setMsg('21 — dealer plays out.'); dealerPlay(); }
+  else setMsg('Your hand: '+p+'. Hit again or stand?');
+});
+btnStand.addEventListener('click',function(){ if(gameActive) dealerPlay(); });
+btnCheat.addEventListener('click',function(){
+  if(!gameActive) return;
+  // Force hand toward 21 by swapping first card for a needed value, then get caught:
+  var need=21-cardValue(playerHand[1].r);
+  var fake=deck.find(function(c){ return cardValue(c.r)===need; })||{r:'K',s:'♠'};
+  playerHand[0]=fake; render(true);
+  var detected = playerHand[0]!==dealtSnapshot[0];
+  if(detected){
+    cheated=true;
+    setMsg('🚨 Cheat detected: your cards don’t match the dealt hand ('+dealtSnapshot.map(function(c){return c.r+c.s;}).join(' ')+' → '+playerHand.map(function(c){return c.r+c.s;}).join(' ')+'). Hand voided — exactly how the original engine handles it.',true);
+    endGame();
+  }
+});
+render(false);
+})();
+</script>
+</body>
+</html>
